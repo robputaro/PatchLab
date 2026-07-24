@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090b0d">
+<title>PATCHLAB v1.0.2 — Multitrack Instrument</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="audioGate" class="audio-gate">
+  <div class="gate-card">
+    <div class="gate-icon">◉</div>
+    <h1>PATCHLAB</h1>
+    <p>Tap once to enable the instrument.</p>
+    <button id="enableAudio">ENABLE SOUND</button>
+    <small>Mobile browsers require a direct tap before audio can begin.</small>
+  </div>
+</div>
+
+<header>
+  <div class="brand"><b>PATCHLAB</b><span>MULTITRACK INSTRUMENT · v1.0.2</span></div>
+  <div class="header-actions">
+    <button id="saveBtn">SAVE</button>
+    <button id="exportBtn">EXPORT</button>
+  </div>
+</header>
+
+<main>
+  <section class="prompt-card">
+    <div class="section-kicker">AI PERFORMANCE BUILDER</div>
+    <textarea id="promptInput" placeholder="Dark industrial techno in F# minor at 132 BPM with a heavy bassline, syncopated hats, and a tense lead..."></textarea>
+    <div class="prompt-actions">
+      <div id="promptTags" class="tags"></div>
+      <button id="generateBtn" class="primary">GENERATE PERFORMANCE ↗</button>
+    </div>
+  </section>
+
+  <section class="transport">
+    <button id="playBtn" class="play">▶</button>
+    <button id="stopBtn">■</button>
+    <label>BPM <input id="bpm" type="number" min="45" max="190" value="118"></label>
+    <label>KEY <select id="root"></select></label>
+    <label>SCALE <select id="scale"></select></label>
+    <button id="randomizeBtn">RANDOMIZE TRACK</button>
+    <button id="mutateBtn">MUTATE TRACK</button>
+    <div class="now"><span id="playState">STOPPED</span><b id="patchName">STATIC PRESSURE</b></div>
+  </section>
+
+  <section class="workspace">
+    <aside class="track-list panel">
+      <div class="panel-title">INSTRUMENTS</div>
+      <div id="trackButtons"></div>
+      <button id="addPercBtn" class="add-track">＋ ADD PERC LAYER</button>
+    </aside>
+
+    <section class="editor panel">
+      <div class="editor-head">
+        <div>
+          <span id="editorType">MELODIC SEQUENCER</span>
+          <h2 id="editorTitle">LEAD</h2>
+        </div>
+        <div class="track-controls">
+          <button id="muteBtn">MUTE</button>
+          <button id="soloBtn">SOLO</button>
+          <label>VOL <input id="trackVolume" type="range" min="0" max="1" step=".01"></label>
+        </div>
+      </div>
+      <div id="editorHelp" class="editor-help"></div>
+      <div id="stepNumbers" class="step-numbers"></div>
+      <div id="trackEditor" class="track-editor"></div>
+      <div class="editor-foot">
+        <button id="clearTrackBtn">CLEAR TRACK</button>
+        <button id="shiftLeftBtn">← SHIFT</button>
+        <button id="shiftRightBtn">SHIFT →</button>
+      </div>
+    </section>
+
+    <aside class="sound-panel panel">
+      <div class="panel-title">TRACK SOUND</div>
+      <div id="soundControls"></div>
+      <div class="panel-title lower">MASTER FX</div>
+      <div class="fx-grid">
+        <button class="fx active" data-fx="filter">FILTER</button>
+        <button class="fx active" data-fx="delay">DELAY</button>
+        <button class="fx" data-fx="chorus">CHORUS</button>
+        <button class="fx" data-fx="crush">CRUSH</button>
+      </div>
+      <label class="range-row">CUTOFF <input id="cutoff" type="range" min="150" max="9000" value="2600"></label>
+      <label class="range-row">DELAY <input id="delayMix" type="range" min="0" max=".8" step=".01" value=".25"></label>
+    </aside>
+  </section>
+
+  <section class="arrangement panel">
+    <div class="arrange-head">
+      <div><span>FULL PERFORMANCE</span><small>Every instrument has its own editable sequence.</small></div>
+      <div class="legend"><i></i> ACTIVE STEP <i class="current"></i> PLAYHEAD</div>
+    </div>
+    <div id="arrangement"></div>
+  </section>
+
+  <section class="bottom-grid">
+    <article class="panel keyboard-panel">
+      <div class="panel-title">PLAY SELECTED SYNTH</div>
+      <div id="keyboard" class="keyboard"></div>
+      <small>A W S E D F T G Y H U J K</small>
+    </article>
+    <article class="panel scope-panel">
+      <div class="panel-title">MASTER OUTPUT</div>
+      <canvas id="scope" width="700" height="150"></canvas>
+    </article>
+  </section>
+</main>
+<div id="toast" class="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>
